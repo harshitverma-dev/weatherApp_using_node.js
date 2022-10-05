@@ -81,13 +81,13 @@
         const tempStatus = '{%tempStatus%}';
         console.log(tempStatus)
         if (tempStatus === 'Clouds') {
-            weatherCondition.innerHTML = '<i class="fa-solid fa-clouds"></i>';
-        } else if (tempStatus === 'Rainy') {
+            weatherCondition.innerHTML = '<i class="fa-solid fa-cloud"></i>';
+        } else if (tempStatus === 'Rain') {
             weatherCondition.innerHTML = '<i class="fa-solid fa-cloud-showers-heavy"></i>';
         } else if (tempStatus === 'Sunny') {
             weatherCondition.innerHTML = '<i class="fa-solid fa-sun"></i>';
         } else {
-            weatherCondition.innerHTML = '<i class="fa-solid fa-clouds"></i>';
+            weatherCondition.innerHTML = '<i class="fa-solid fa-cloud"></i>';
         }
         const getCurrentDay = () => {
             const weekday = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
