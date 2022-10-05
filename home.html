@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- font awesome icon link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .body {
+            position: relative;
+        }
+
+        .box {
+            width: 100%;
+            background: #ddddff;
+            text-align: center;
+            max-width: 300px;
+            padding: 20px 40px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+            font-family: monospace;
+            border-radius: 25px;
+        }
+
+        #weatherCondition {
+            font-size: 50px;
+            padding: 50px 30px;
+        }
+
+        .weather-info {
+            line-height: 30px;
+        }
+
+        .weather-info>p {
+            margin-bottom: 25px;
+        }
+
+        .weather-info>h3 {
+            padding-top: 8px;
+            padding-bottom: 15px;
+        }
+
+        .fa-street-view {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+        <div id="weatherCondition">
+            <i class="fa-solid fa-sun"></i>
+        </div>
+
+        <div class="weather-info">
+            <h2 class="location"><i class="fa-solid fa-street-view"></i>{%name%},{%country%}</h2>
+            <p id="date">WED | OCT 23 | 10:49AM</p>
+            <h1 class="temp">{%temp%}</h1>
+            <h3 class="tempmin_max">{%temp_min%} | {%temp_max%}</h3>
+        </div>
+    </div>
+
+    <script>
+        const curDate = document.getElementById('date');
+        let weatherCondition = document.getElementById('weatherCondition');
+        const tempStatus = '{%tempStatus%}';
+        console.log(tempStatus)
+        if (tempStatus === 'Clouds') {
+            weatherCondition.innerHTML = '<i class="fa-solid fa-clouds"></i>';
+        } else if (tempStatus === 'Rainy') {
+            weatherCondition.innerHTML = '<i class="fa-solid fa-cloud-showers-heavy"></i>';
+        } else if (tempStatus === 'Sunny') {
+            weatherCondition.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        } else {
+            weatherCondition.innerHTML = '<i class="fa-solid fa-clouds"></i>';
+        }
+        const getCurrentDay = () => {
+            const weekday = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
+            const month = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+            let currentDate1 = new Date();
+            // for day
+            let FinalExactDay = weekday[currentDate1.getDay()];
+            let FinalExactMonth = month[currentDate1.getMonth()];
+            let FinalExactDate = currentDate1.getDate();
+            let FinalHour = currentDate1.getHours();
+            let FinalMinutes = currentDate1.getMinutes();
+            let period = 'AM';
+
+            if (FinalHour > 11) {
+                period = 'PM';
+                FinalHour > 12 ? FinalHour -= 12 : null;
+            }
+            if (FinalMinutes < 10) {
+                FinalMinutes = '0' + FinalMinutes;
+            }
+
+            return `${FinalExactDay} | ${FinalExactMonth} ${FinalExactDate} | ${FinalHour}:${FinalMinutes}${period}`
+        }
+        curDate.innerHTML = getCurrentDay();
+    </script>
+
+</body>
+
+</html>
